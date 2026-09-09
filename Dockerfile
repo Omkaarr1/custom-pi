@@ -12,6 +12,9 @@ RUN apt-get update && \
 
 RUN npm install -g @jmfederico/pi-web --allow-scripts=node-pty
 
+RUN usermod -u 1002 node && \
+    groupmod -g 1002 node
+
 ENV HOME=/home/node
 ENV PI_WEB_HOST=0.0.0.0
 ENV PI_WEB_PORT=8504

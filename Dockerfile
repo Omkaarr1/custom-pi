@@ -12,11 +12,11 @@ RUN apt-get update && \
 
 RUN npm install -g @jmfederico/pi-web --allow-scripts=node-pty
 
-ENV HOME=/home/omkar
+ENV HOME=/home/node
 ENV PI_WEB_HOST=0.0.0.0
 ENV PI_WEB_PORT=8504
 
-WORKDIR /home/omkar
+WORKDIR /home/node
 
 USER node
 

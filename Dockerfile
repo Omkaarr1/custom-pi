@@ -13,6 +13,7 @@ RUN apt-get update && \
 RUN npm install -g @jmfederico/pi-web --allow-scripts=node-pty
 
 ENV HOME=/home/node
+ENV PI_WEB_HOST=0.0.0.0
 ENV PI_WEB_PORT=8504
 
 WORKDIR /home/node
@@ -21,4 +22,4 @@ USER node
 
 EXPOSE 8504
 
-CMD ["sh", "-c", "pi-web-sessiond & exec pi-web-server --hostname 0.0.0.0 --port 8504"]
+CMD ["sh", "-c", "pi-web-sessiond & exec pi-web-server"]

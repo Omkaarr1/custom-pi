@@ -14,7 +14,6 @@ RUN npm install -g @jmfederico/pi-web --allow-scripts=node-pty
 
 ENV HOME=/home/node
 ENV PI_WEB_PORT=8504
-ENV PI_WEB_HOSTNAME=0.0.0.0
 
 WORKDIR /home/node
 
@@ -22,4 +21,4 @@ USER node
 
 EXPOSE 8504
 
-CMD ["sh", "-c", "pi-web-sessiond & exec pi-web-server"]
+CMD ["sh", "-c", "pi-web-sessiond & exec pi-web-server --hostname 0.0.0.0 --port 8504"]

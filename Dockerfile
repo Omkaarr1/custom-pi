@@ -1,7 +1,7 @@
 FROM node:22-bookworm
 
 RUN apt-get update && \
-    apt-get install -y \
+    apt-get install -y --no-install-recommends \
         git \
         openssh-client \
         curl \
@@ -12,15 +12,14 @@ RUN apt-get update && \
 
 RUN npm install -g @jmfederico/pi-web --allow-scripts=node-pty
 
-# Use the existing UID 1000 user in the Node image
-RUN usermod -l omkar node && \
-    groupmod -n omkar node && \
-    usermod -d /home/omkar -m omkar
+ENV HOME=/home/node
+ENV PI_WEB_PORT=8504
+ENV PI_WEB_HOSTNAME=0.0.0.0
 
-USER omkar
+WORKDIR /home/node
 
-WORKDIR /home/omkar
+USER node
 
 EXPOSE 8504
 
-CMD ["pi-web", "start"]
+CMD ["sh", "-c", "pi-web-sessiond & exec pi-web-server"]
